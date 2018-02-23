@@ -13,7 +13,9 @@ LEDFunctionalColor::LEDFunctionalColor(void) {
 void LEDFunctionalColor::brightness(byte brightness) {
   color_escape = dim(color_escape, brightness);
   color_numbers = dim(color_numbers, brightness);
-  color_letters = dim(color_letters, brightness);
+  color_letters_top_row = dim(color_letters_top_row, brightness);
+  color_letters_home_row = dim(color_letters_home_row, brightness);
+  color_letters_bottom_row = dim(color_letters_bottom_row, brightness);
   color_punctuation = dim(color_punctuation, brightness);
   color_brackets = dim(color_brackets, brightness);
   color_backslash = dim(color_backslash, brightness);
@@ -49,7 +51,9 @@ void LEDFunctionalColor::brightness(byte brightness) {
 void LEDFunctionalColor::all(cRGB color){
   color_escape = color;
   color_numbers = color;
-  color_letters = color;
+  color_letters_top_row = color;
+  color_letters_home_row = color;
+  color_letters_bottom_row = color;
   color_punctuation = color;
   color_brackets = color;
   color_backslash = color;
@@ -118,8 +122,14 @@ void LEDFunctionalColor::numbers(cRGB color){
   color_numbers = color;
 }
 
-void LEDFunctionalColor::letters(cRGB color){
-  color_letters = color;
+void LEDFunctionalColor::letters_top_row(cRGB color){
+  color_letters_top_row = color;
+}
+void LEDFunctionalColor::letters_home_row(cRGB color){
+  color_letters_home_row = color;
+}
+void LEDFunctionalColor::letters_bottom_row(cRGB color){
+  color_letters_bottom_row = color;
 }
 
 void LEDFunctionalColor::punctuation(cRGB color){
@@ -239,7 +249,9 @@ void LEDFunctionalColor::mousescroll(cRGB color){
 void LEDFunctionalColor::all(cRGB color, byte brightness){
   color_escape = dim(color, brightness);
   color_numbers = dim(color, brightness);
-  color_letters = dim(color, brightness);
+  color_letters_top_row = dim(color, brightness);
+  color_letters_home_row = dim(color, brightness);
+  color_letters_bottom_row = dim(color, brightness);
   color_punctuation = dim(color, brightness);
   color_brackets = dim(color, brightness);
   color_backslash = dim(color, brightness);
@@ -308,8 +320,14 @@ void LEDFunctionalColor::numbers(cRGB color, byte brightness){
   color_numbers = dim(color, brightness);
 }
 
-void LEDFunctionalColor::letters(cRGB color, byte brightness){
-  color_letters = dim(color, brightness);
+void LEDFunctionalColor::letters_top_row(cRGB color, byte brightness){
+  color_letters_top_row = dim(color, brightness);
+}
+void LEDFunctionalColor::letters_home_row(cRGB color, byte brightness){
+  color_letters_home_row = dim(color, brightness);
+}
+void LEDFunctionalColor::letters_bottom_row(cRGB color, byte brightness){
+  color_letters_bottom_row = dim(color, brightness);
 }
 
 void LEDFunctionalColor::punctuation(cRGB color, byte brightness){
@@ -428,12 +446,12 @@ void LEDFunctionalColor::mousescroll(cRGB color, byte brightness){
  * setKeyLed accepts a Key position and sets it to the appropriate color
  * from the user's definitions a using a series of if/else statements.
  */
-void LEDFunctionalColor::setKeyLed(uint8_t r, uint8_t c) { 
+void LEDFunctionalColor::setKeyLed(uint8_t r, uint8_t c) {
   Key k = Layer.lookupOnActiveLayer(r, c);
   if (k == Key_Escape) {::LEDControl.setCrgbAt(r, c, color_escape); return;}
   else if (k == Key_LEDEffectNext) {::LEDControl.setCrgbAt(r, c, color_led); return;}
-  
-  // letters
+
+  // numbers
   else if (k == Key_1) {::LEDControl.setCrgbAt(r, c, color_numbers); return;}
   else if (k == Key_2) {::LEDControl.setCrgbAt(r, c, color_numbers); return;}
   else if (k == Key_3) {::LEDControl.setCrgbAt(r, c, color_numbers); return;}
@@ -446,34 +464,38 @@ void LEDFunctionalColor::setKeyLed(uint8_t r, uint8_t c) {
   else if (k == Key_0) {::LEDControl.setCrgbAt(r, c, color_numbers); return;}
   else if (k == Key_Minus) {::LEDControl.setCrgbAt(r, c, color_numbers); return;}
   else if (k == Key_Equals) {::LEDControl.setCrgbAt(r, c, color_numbers); return;}
- 
-  // letters
-  else if (k == Key_A) {::LEDControl.setCrgbAt(r, c, color_letters); return;}
-  else if (k == Key_B) {::LEDControl.setCrgbAt(r, c, color_letters); return;}
-  else if (k == Key_C) {::LEDControl.setCrgbAt(r, c, color_letters); return;}
-  else if (k == Key_D) {::LEDControl.setCrgbAt(r, c, color_letters); return;}
-  else if (k == Key_E) {::LEDControl.setCrgbAt(r, c, color_letters); return;}
-  else if (k == Key_F) {::LEDControl.setCrgbAt(r, c, color_letters); return;}
-  else if (k == Key_G) {::LEDControl.setCrgbAt(r, c, color_letters); return;}
-  else if (k == Key_H) {::LEDControl.setCrgbAt(r, c, color_letters); return;}
-  else if (k == Key_I) {::LEDControl.setCrgbAt(r, c, color_letters); return;}
-  else if (k == Key_J) {::LEDControl.setCrgbAt(r, c, color_letters); return;}
-  else if (k == Key_K) {::LEDControl.setCrgbAt(r, c, color_letters); return;}
-  else if (k == Key_L) {::LEDControl.setCrgbAt(r, c, color_letters); return;}
-  else if (k == Key_M) {::LEDControl.setCrgbAt(r, c, color_letters); return;}
-  else if (k == Key_N) {::LEDControl.setCrgbAt(r, c, color_letters); return;}
-  else if (k == Key_O) {::LEDControl.setCrgbAt(r, c, color_letters); return;}
-  else if (k == Key_P) {::LEDControl.setCrgbAt(r, c, color_letters); return;}
-  else if (k == Key_Q) {::LEDControl.setCrgbAt(r, c, color_letters); return;}
-  else if (k == Key_R) {::LEDControl.setCrgbAt(r, c, color_letters); return;}
-  else if (k == Key_S) {::LEDControl.setCrgbAt(r, c, color_letters); return;}
-  else if (k == Key_T) {::LEDControl.setCrgbAt(r, c, color_letters); return;}
-  else if (k == Key_U) {::LEDControl.setCrgbAt(r, c, color_letters); return;}
-  else if (k == Key_V) {::LEDControl.setCrgbAt(r, c, color_letters); return;}
-  else if (k == Key_W) {::LEDControl.setCrgbAt(r, c, color_letters); return;}
-  else if (k == Key_X) {::LEDControl.setCrgbAt(r, c, color_letters); return;}
-  else if (k == Key_Y) {::LEDControl.setCrgbAt(r, c, color_letters); return;}
-  else if (k == Key_Z) {::LEDControl.setCrgbAt(r, c, color_letters); return;}
+
+  // letters - top row
+  else if (k == Key_Q) {::LEDControl.setCrgbAt(r, c, color_letters_top_row); return;}
+  else if (k == Key_W) {::LEDControl.setCrgbAt(r, c, color_letters_top_row); return;}
+  else if (k == Key_E) {::LEDControl.setCrgbAt(r, c, color_letters_top_row); return;}
+  else if (k == Key_R) {::LEDControl.setCrgbAt(r, c, color_letters_top_row); return;}
+  else if (k == Key_T) {::LEDControl.setCrgbAt(r, c, color_letters_top_row); return;}
+  else if (k == Key_Y) {::LEDControl.setCrgbAt(r, c, color_letters_top_row); return;}
+  else if (k == Key_U) {::LEDControl.setCrgbAt(r, c, color_letters_top_row); return;}
+  else if (k == Key_I) {::LEDControl.setCrgbAt(r, c, color_letters_top_row); return;}
+  else if (k == Key_O) {::LEDControl.setCrgbAt(r, c, color_letters_top_row); return;}
+  else if (k == Key_P) {::LEDControl.setCrgbAt(r, c, color_letters_top_row); return;}
+
+  // letters - home row
+  else if (k == Key_A) {::LEDControl.setCrgbAt(r, c, color_letters_home_row); return;}
+  else if (k == Key_S) {::LEDControl.setCrgbAt(r, c, color_letters_home_row); return;}
+  else if (k == Key_D) {::LEDControl.setCrgbAt(r, c, color_letters_home_row); return;}
+  else if (k == Key_F) {::LEDControl.setCrgbAt(r, c, color_letters_home_row); return;}
+  else if (k == Key_G) {::LEDControl.setCrgbAt(r, c, color_letters_home_row); return;}
+  else if (k == Key_H) {::LEDControl.setCrgbAt(r, c, color_letters_home_row); return;}
+  else if (k == Key_J) {::LEDControl.setCrgbAt(r, c, color_letters_home_row); return;}
+  else if (k == Key_K) {::LEDControl.setCrgbAt(r, c, color_letters_home_row); return;}
+  else if (k == Key_L) {::LEDControl.setCrgbAt(r, c, color_letters_home_row); return;}
+
+  // letters - bottom row
+  else if (k == Key_Z) {::LEDControl.setCrgbAt(r, c, color_letters_bottom_row); return;}
+  else if (k == Key_X) {::LEDControl.setCrgbAt(r, c, color_letters_bottom_row); return;}
+  else if (k == Key_C) {::LEDControl.setCrgbAt(r, c, color_letters_bottom_row); return;}
+  else if (k == Key_V) {::LEDControl.setCrgbAt(r, c, color_letters_bottom_row); return;}
+  else if (k == Key_B) {::LEDControl.setCrgbAt(r, c, color_letters_bottom_row); return;}
+  else if (k == Key_N) {::LEDControl.setCrgbAt(r, c, color_letters_bottom_row); return;}
+  else if (k == Key_M) {::LEDControl.setCrgbAt(r, c, color_letters_bottom_row); return;}
 
   // punctuation
   else if (k == Key_Backtick) {::LEDControl.setCrgbAt(r, c, color_punctuation); return;}
@@ -490,7 +512,7 @@ void LEDFunctionalColor::setKeyLed(uint8_t r, uint8_t c) {
 
   else if (k == Key_Backslash) {::LEDControl.setCrgbAt(r, c, color_backslash); return;}
   else if (k == Key_Pipe) {::LEDControl.setCrgbAt(r, c, color_pipe); return;}
-  
+
   else if (k == Key_Space) {::LEDControl.setCrgbAt(r, c, color_space); return;}
   else if (k == Key_Enter) {::LEDControl.setCrgbAt(r, c, color_enter); return;}
   else if (k == Key_Tab) {::LEDControl.setCrgbAt(r, c, color_tab); return;}
@@ -509,7 +531,7 @@ void LEDFunctionalColor::setKeyLed(uint8_t r, uint8_t c) {
   else if (k == Key_UpArrow) {::LEDControl.setCrgbAt(r, c, color_arrows); return;}
   else if (k == Key_DownArrow) {::LEDControl.setCrgbAt(r, c, color_arrows); return;}
   else if (k == Key_RightArrow) {::LEDControl.setCrgbAt(r, c, color_arrows); return;}
-  
+
   // modifiers
   else if (k == Key_LeftShift) {::LEDControl.setCrgbAt(r, c, color_shift); return;}
   else if (k == Key_RightShift) {::LEDControl.setCrgbAt(r, c, color_shift); return;}
@@ -521,7 +543,7 @@ void LEDFunctionalColor::setKeyLed(uint8_t r, uint8_t c) {
   else if (k == Key_RightGui) {::LEDControl.setCrgbAt(r, c, color_cmd); return;}
   // context menu key
   else if (k == Key_PcApplication) {::LEDControl.setCrgbAt(r, c, color_app); return;}
-  
+
   // function keys
   else if (k == Key_F1) {::LEDControl.setCrgbAt(r, c, color_fkeys); return;}
   else if (k == Key_F2) {::LEDControl.setCrgbAt(r, c, color_fkeys); return;}
@@ -548,7 +570,7 @@ void LEDFunctionalColor::setKeyLed(uint8_t r, uint8_t c) {
   else if (k == Key_Pause) {::LEDControl.setCrgbAt(r, c, color_pause); return;}
   else if (k == Key_ScrollLock) {::LEDControl.setCrgbAt(r, c, color_scrolllock); return;}
   else if (k == Key_CapsLock) {::LEDControl.setCrgbAt(r, c, color_capslock); return;}
-  
+
   // media keys
   else if (k == Consumer_PlaySlashPause) {::LEDControl.setCrgbAt(r, c, color_media); return;}
   else if (k == Consumer_ScanPreviousTrack) {::LEDControl.setCrgbAt(r, c, color_media); return;}
@@ -621,13 +643,13 @@ void LEDFunctionalColor::update(void) {
     // Turn off when the function layer is active
     if (current_layer == 0) {
       // left fn
-      ::LEDControl.setCrgbAt(3, 6, color_fn); 
+      ::LEDControl.setCrgbAt(3, 6, color_fn);
       // right fn
       ::LEDControl.setCrgbAt(3, 9, color_fn);
     }
     else {
       // left fn
-      ::LEDControl.setCrgbAt(3, 6, CRGB(0, 0, 0)); 
+      ::LEDControl.setCrgbAt(3, 6, CRGB(0, 0, 0));
       // right fn
       ::LEDControl.setCrgbAt(3, 9, CRGB(0, 0, 0));
     }

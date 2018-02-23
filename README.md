@@ -3,7 +3,7 @@
 
 
 This plugin automatically colors groups of keys per the user's preference
-based on the current function of the key on the active layer. 
+based on the current function of the key on the active layer.
 
 ## Using the extension
 
@@ -41,6 +41,7 @@ void setup() {
     cRGB red = CRGB(255, 0, 0);
     cRGB skyblue = CRGB(135, 206, 235);
     cRGB slateblue = CRGB(106, 90, 205);
+    cRGB purple = CRGB(150, 50, 255);
     cRGB violet = CRGB(238, 130, 238);
     cRGB white = CRGB(255, 255, 255);
     cRGB yellow = CRGB(255, 255, 0);
@@ -59,27 +60,29 @@ void setup() {
     FunColor.allModifiers(CRGB(250, 235, 215));
 
     // Set this before individual mouse settings to change all mouse-related keys
-    FunColor.allMouse(CRGB(0, 200, 200)); 
+    FunColor.allMouse(CRGB(0, 200, 200));
 
     //Set individual groups of colors. You may delete any lines you don't need.
     FunColor.escape(red, 170);
-    FunColor.numbers(white, 160);
-    FunColor.letters(antiquewhite, 100);
-    FunColor.punctuation(antiquewhite, 170);
-    FunColor.brackets(antiquewhite, 200);
-    FunColor.backslash(antiquewhite, 170);
-    FunColor.pipe(antiquewhite, 170);
-    FunColor.tab(white, 170);
+    FunColor.numbers(orange, 160);
+    FunColor.letters_top_row(yellow, 100);
+    FunColor.letters_home_row(yellowgreen, 100);
+    FunColor.letters_bottom_row(green, 100);
+    FunColor.punctuation(cyan, 100);
+    FunColor.brackets(blue, 200);
+    FunColor.backslash(red, 170);
+    FunColor.pipe(cyan, 170);
+    FunColor.tab(blue, 170);
     FunColor.backspace(red, 170);
     FunColor.del(red, 170);
-    FunColor.enter(white, 170);
-    FunColor.arrows(white, 170);
-    FunColor.nav(yellow, 170);
-    FunColor.insert(yellow, 170);
-    FunColor.shift(palegreen, 170);
-    FunColor.ctrl(skyblue, 170);
-    FunColor.alt(green, 170);
-    FunColor.cmd(CRGB(250, 235, 215));
+    FunColor.enter(lime, 190);
+    FunColor.arrows(green, 170);
+    FunColor.nav(cyan, 170);
+    FunColor.insert(green, 170);
+    FunColor.shift(purple, 190);
+    FunColor.ctrl(blue, 170);
+    FunColor.alt(violet, 200);
+    FunColor.cmd(violet, 200);
     FunColor.app(CRGB(250, 235, 215));
     FunColor.printscreen(CRGB(250, 235, 215));
     FunColor.pause(CRGB(250, 235, 215));

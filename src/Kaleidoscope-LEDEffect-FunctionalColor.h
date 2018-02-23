@@ -19,7 +19,9 @@ class LEDFunctionalColor : public LEDMode {
   void allMouse(cRGB color);
   void escape(cRGB color);
   void numbers(cRGB color);
-  void letters(cRGB color);
+  void letters_top_row(cRGB color);
+  void letters_home_row(cRGB color);
+  void letters_bottom_row(cRGB color);
   void punctuation(cRGB color);
   void brackets(cRGB color);
   void backslash(cRGB color);
@@ -56,7 +58,9 @@ class LEDFunctionalColor : public LEDMode {
   void allMouse(cRGB color, byte brightness);
   void escape(cRGB color, byte brightness);
   void numbers(cRGB color, byte brightness);
-  void letters(cRGB color, byte brightness);
+  void letters_top_row(cRGB color, byte brightness);
+  void letters_home_row(cRGB color, byte brightness);
+  void letters_bottom_row(cRGB color, byte brightness);
   void punctuation(cRGB color, byte brightness);
   void brackets(cRGB color, byte brightness);
   void backslash(cRGB color, byte brightness);
@@ -97,12 +101,14 @@ class LEDFunctionalColor : public LEDMode {
   //define colors for certain groups of keys
   cRGB color_escape = dim(CRGB(255, 0, 0), 140);
   cRGB color_numbers = dim(CRGB(250, 235, 215), 220);
-  cRGB color_letters = dim(CRGB(250, 235, 215), 100);
+  cRGB color_letters_top_row = dim(CRGB(250, 235, 215), 100);
+  cRGB color_letters_home_row = dim(CRGB(250, 235, 215), 100);
+  cRGB color_letters_bottom_row = dim(CRGB(250, 235, 215), 100);
   cRGB color_punctuation = dim(CRGB(250, 235, 215), 150);
   cRGB color_brackets = dim(CRGB(250, 235, 215), 200);
   cRGB color_backslash = dim(CRGB(250, 235, 215), 200);
   cRGB color_pipe = dim(CRGB(250, 235, 215), 200);
-  cRGB color_space = dim(CRGB(255, 255, 255), 180);
+  cRGB color_space = dim(CRGB(200, 255, 255), 160);
   cRGB color_tab = dim(CRGB(255, 255, 255), 180);
   cRGB color_backspace = dim(CRGB(255, 0, 0), 120);
   cRGB color_delete = dim(CRGB(255, 100, 0), 250);
@@ -117,12 +123,12 @@ class LEDFunctionalColor : public LEDMode {
   cRGB color_cmd = dim(CRGB(255, 192, 203), 170);
   //application context menu key
   cRGB color_app = dim(CRGB(250, 235, 215), 150);
-  
+
   cRGB color_printscreen = dim(CRGB(255, 165, 0), 200);
   cRGB color_pause = dim(CRGB(255, 100, 0), 150);
   cRGB color_scrolllock = dim(CRGB(255, 165, 0), 150);
   cRGB color_capslock = dim(CRGB(255, 165, 0), 150);
-  
+
   cRGB color_fkeys = dim(CRGB(255, 0, 0), 180);
   cRGB color_fn = dim(CRGB(255, 255, 255), 140);
   cRGB color_media = dim(CRGB(238, 130, 238), 250);
